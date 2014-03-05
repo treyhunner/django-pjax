@@ -1,6 +1,10 @@
 import functools
 
 from django.views.generic.base import TemplateResponseMixin
+try:
+    from django.utils.six import string_types
+except ImportError:
+    string_types = basestring
 
 def pjax(pjax_template=None):
     def pjax_decorator(view):
@@ -54,7 +58,7 @@ class PJAXResponseMixin(TemplateResponseMixin):
 def _pjaxify_template_var(template_var):
     if isinstance(template_var, (list, tuple)):
         template_var = type(template_var)(_pjaxify_template_name(name) for name in template_var)
-    elif isinstance(template_var, basestring):
+    elif isinstance(template_var, string_types):
         template_var = _pjaxify_template_name(template_var)
     return template_var
 
