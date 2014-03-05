@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - 2.6
+  - 2.7
+
+env:
+  - DJANGO=Django==1.4.10
+  - DJANGO=Django==1.5.5
+  - DJANGO=Django==1.6.2
+
+install:
+  - pip install $DJANGO
+  - pip install nose
+
+script:
+  - nosetests tests.py
